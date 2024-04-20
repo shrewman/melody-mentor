@@ -5,9 +5,7 @@ const Tuner = () => {
   const [detectedFrequency, setDetectedFrequency] = useState(0);
   const [stream, setStream] = useState<MediaStream | null>(null);
 
-
   useEffect(() => {
-    console.log("mount")
     const audioContext = new AudioContext();
     const startListening = async () => {
       try {
@@ -15,23 +13,30 @@ const Tuner = () => {
           audio: true,
         });
         setStream(micStream);
+        const fftSize = 2048;
         const analyser = audioContext.createAnalyser();
+        analyser.fftSize = fftSize;
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
         const microphone = audioContext.createMediaStreamSource(micStream);
         microphone.connect(analyser);
 
         const updatePitch = () => {
-          const bufferLength = analyser.frequencyBinCount;
-          const dataArray = new Uint8Array(bufferLength);
-          analyser.getByteTimeDomainData(dataArray);
-
-          // Perform frequency analysis and update detectedFrequency state
-          // You can use FFT algorithms to perform this analysis
+          analyser.getByteFrequencyData(dataArray);
+          const maxIndex = dataArray.reduce(
+            (maxIndex, value, currentIndex, array) => {
+              return value > array[maxIndex] ? currentIndex : maxIndex;
+            },
+            0,
+          );
+          const sampleRate = audioContext.sampleRate;
+          const frequency = (maxIndex * sampleRate) / fftSize;
+          setDetectedFrequency(frequency);
         };
 
-        const intervalId = setInterval(updatePitch, 1000);
+        const intervalId = setInterval(updatePitch, 100);
 
         return () => {
-          console.log("umount");
           clearInterval(intervalId);
           micStream.getTracks().forEach((track) => track.stop());
         };
