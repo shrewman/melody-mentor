@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import noteFrequencyMap from "../utils/noteFrequencyMap.ts";
 
 const Tuner = () => {
   const [isTuning, setIsTuning] = useState(false);
   const [detectedFrequency, setDetectedFrequency] = useState(0);
   const [stream, setStream] = useState<MediaStream | null>(null);
+  const [nearestNote, setNearestNote] = useState<string | null>(null);
 
   useEffect(() => {
     const audioContext = new AudioContext();
@@ -13,7 +15,9 @@ const Tuner = () => {
           audio: true,
         });
         setStream(micStream);
-        const fftSize = 2048;
+        // Bigger the number - more precise result and more time to compute
+        // const fftSize = 8192;
+        const fftSize = 16384;
         const analyser = audioContext.createAnalyser();
         analyser.fftSize = fftSize;
         const bufferLength = analyser.frequencyBinCount;
@@ -56,12 +60,28 @@ const Tuner = () => {
     }
   }, [isTuning]);
 
+  // TODO: find faster solution
+  useEffect(() => {
+    let minDifference = Number.MAX_VALUE;
+
+    for (const [note, frequency] of Object.entries(noteFrequencyMap)) {
+      const difference = Math.abs(detectedFrequency - frequency);
+      if (difference < minDifference) {
+        minDifference = difference;
+        setNearestNote(note);
+      }
+    }
+
+  }, [detectedFrequency]);
+
+  // TODO: better interface, <progress> maybe? 
   return (
     <div>
       <button onClick={() => setIsTuning(!isTuning)}>
         {isTuning ? "Stop Tuning" : "Start Tuning"}
       </button>
       <p>Detected Frequency: {detectedFrequency} Hz</p>
+      <p>Nearest Note: {nearestNote}</p>
     </div>
   );
 };
