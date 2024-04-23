@@ -13,7 +13,7 @@ export default function Songs() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/songs")
+    fetch("http://localhost:3000/api/v1/songs")
       .then((res) => {
         if (!res.ok) {
           alert("not ok");

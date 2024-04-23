@@ -26,7 +26,7 @@ connection.connect((err) => {
 app.use("/songs", express.static("songs"));
 app.use(cors());
 
-app.get("/api/songs", (req, res) => {
+app.get("/api/v1/songs", (req, res) => {
   const sql = "SELECT * FROM songs";
   connection.query(sql, (err, results) => {
     if (err) {
