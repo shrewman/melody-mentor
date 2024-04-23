@@ -10,6 +10,7 @@ type Song = {
 
 export default function Songs() {
   const [songs, setSongs] = useState<Song[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch("http://localhost:3000/api/songs")
@@ -22,6 +23,7 @@ export default function Songs() {
       })
       .then((data) => {
         setSongs(data);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.error("Error fetching songs: ", err);
@@ -30,14 +32,18 @@ export default function Songs() {
 
   return (
     <>
-      <div>
-        {songs?.map((song) => (
-          <div key={song.song_id}>
-            <div>{song.title}</div>
-            <div>{song.artist}</div>
-          </div>
-        ))}
-      </div>
+      {isLoading ? (
+        <div>loading...</div>
+      ) : (
+        <div>
+          {songs?.map((song) => (
+            <div key={song.song_id}>
+              <div>{song.title}</div>
+              <div>{song.artist}</div>
+            </div>
+          ))}
+        </div>
+      )}
     </>
   );
 }
