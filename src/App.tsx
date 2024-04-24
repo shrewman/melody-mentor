@@ -13,6 +13,7 @@ function App() {
     <>
       <BrowserRouter>
         <Navbar />
+        <div className="p-8"></div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/songs" element={<Songs />} />
