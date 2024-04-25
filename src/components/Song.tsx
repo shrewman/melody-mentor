@@ -1,4 +1,4 @@
-import { Song as SongType} from "../types";
+import { Song as SongType } from "../types";
 import ComplexityBar from "./ComplexityBar";
 
 type Props = {
