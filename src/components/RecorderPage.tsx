@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AudioRecorder } from "react-audio-voice-recorder";
 
-export default function Recorder() {
+export default function RecorderPage() {
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
 
   const addAudioElement = (blob: Blob) => {

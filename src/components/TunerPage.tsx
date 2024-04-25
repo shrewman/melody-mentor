@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import noteFrequencyMap from "../utils/noteFrequencyMap.ts";
 
-const Tuner = () => {
+const TunerPage = () => {
   const [isTuning, setIsTuning] = useState(false);
   const [detectedFrequency, setDetectedFrequency] = useState(0);
   const [stream, setStream] = useState<MediaStream | null>(null);
@@ -86,4 +86,4 @@ const Tuner = () => {
   );
 };
 
-export default Tuner;
+export default TunerPage;

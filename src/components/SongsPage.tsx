@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Song as SongType } from "../types";
 import Song from "./Song";
 
-export default function Songs() {
+export default function SongsPage() {
   const [songs, setSongs] = useState<SongType[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 

@@ -1,12 +1,12 @@
 import "./App.css";
-import Recorder from "./components/Recorder";
+import RecorderPage from "./components/RecorderPage";
 import Navbar from "./components/Navbar";
-import Tuner from "./components/Tuner";
-import Songs from "./components/Songs";
-import Profile from "./components/Profile";
-import Exercises from "./components/Exercises";
+import TunerPage from "./components/TunerPage";
+import SongsPage from "./components/SongsPage";
+import ProfilePage from "./components/ProfilePage";
+import ExercisesPage from "./components/ExercisesPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
+import HomePage from "./components/HomePage";
 
 function App() {
   return (
@@ -15,12 +15,12 @@ function App() {
         <Navbar />
         <div className="p-8"></div>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/songs" element={<Songs />} />
-          <Route path="/recorder" element={<Recorder />} />
-          <Route path="/tuner" element={<Tuner />} />
-          <Route path="/exercises" element={<Exercises />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/songs" element={<SongsPage />} />
+          <Route path="/recorder" element={<RecorderPage />} />
+          <Route path="/tuner" element={<TunerPage />} />
+          <Route path="/exercises" element={<ExercisesPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
     </>
