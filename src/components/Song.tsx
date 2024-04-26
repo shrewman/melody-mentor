@@ -16,7 +16,7 @@ const Song: React.FC<Props> = ({ song }) => {
   };
 
   return (
-    <Link to={"/" + song.file_location}>
+    <Link to={"/songs/" + song.file_name}>
       <div className="mb-4 flex justify-between border-4 border-surface1 bg-surface0 p-3">
         <div>
           <h1 className="mb-3 font-bold">{song.title}</h1>

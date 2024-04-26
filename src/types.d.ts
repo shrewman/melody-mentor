@@ -5,6 +5,6 @@ export type Song = {
   artist: string;
   duration_seconds: number;
   complexity: Complexity;
-  file_location: string;
+  file_name: string;
 };
 
