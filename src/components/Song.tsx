@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Song as SongType } from "../types";
 import ComplexityBar from "./ComplexityBar";
 
@@ -15,14 +16,16 @@ const Song: React.FC<Props> = ({ song }) => {
   };
 
   return (
-    <div className="mb-4 flex justify-between border-4 border-surface1 bg-surface0 p-3">
-      <div>
-        <h1 className="mb-3 font-bold">{song.title}</h1>
-        <h2 className="mb-3">{song.artist}</h2>
-        <p>{convertDuration(song.duration_seconds)}</p>
+    <Link to={"/" + song.file_location}>
+      <div className="mb-4 flex justify-between border-4 border-surface1 bg-surface0 p-3">
+        <div>
+          <h1 className="mb-3 font-bold">{song.title}</h1>
+          <h2 className="mb-3">{song.artist}</h2>
+          <p>{convertDuration(song.duration_seconds)}</p>
+        </div>
+        <ComplexityBar complexity={song.complexity} />
       </div>
-      <ComplexityBar complexity={song.complexity} />
-    </div>
+    </Link>
   );
 };
 

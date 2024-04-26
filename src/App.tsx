@@ -7,6 +7,7 @@ import ProfilePage from "./components/ProfilePage";
 import ExercisesPage from "./components/ExercisesPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./components/HomePage";
+import Tab from "./components/Tab";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/songs" element={<SongsPage />} />
+            <Route path="/songs/:fileName" element={<Tab />} />
             <Route path="/recorder" element={<RecorderPage />} />
             <Route path="/tuner" element={<TunerPage />} />
             <Route path="/exercises" element={<ExercisesPage />} />

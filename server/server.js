@@ -2,6 +2,12 @@ import express from "express";
 import cors from "cors";
 import mysql from "mysql";
 import "dotenv/config";
+import path from "path";
+import { fileURLToPath } from "url";
+import fs from "fs";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = 3000;
@@ -23,8 +29,8 @@ connection.connect((err) => {
   console.log("Connected to db");
 });
 
-app.use("/songs", express.static("songs"));
 app.use(cors());
+app.use(express.static(path.join(__dirname, "songs")));
 
 app.get("/api/v1/songs", (req, res) => {
   const sql = "SELECT * FROM songs";
@@ -36,6 +42,20 @@ app.get("/api/v1/songs", (req, res) => {
     }
     console.log(results);
     res.json(results);
+  });
+});
+
+app.get("/api/v1/songs/:fileName", (req, res) => {
+  const fileName = req.params.fileName;
+  const filePath = path.join(__dirname, "songs", fileName);
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      console.error("Error accessing file: ", err);
+      res.status(404).json({ error: "File not fond" });
+      return;
+    }
+    const fileStream = fs.createReadStream(filePath);
+    fileStream.pipe(res);
   });
 });
 
