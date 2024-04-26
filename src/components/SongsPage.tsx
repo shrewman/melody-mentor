@@ -30,7 +30,7 @@ export default function SongsPage() {
         <div>loading...</div>
       ) : (
         <div className="w-full  p-3">
-          {songs?.map((song) => <Song song={song} />)}
+          {songs?.map((song) => <Song key={song.song_id} song={song} />)}
         </div>
       )}
     </>
