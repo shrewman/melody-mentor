@@ -4,10 +4,10 @@ This project aims to develop a web application for users to play musical notatio
 
 ## Key Features
 
-- [x] Playback of musical notation with sound
+- [ ] Playback of musical notation with sound
 - [ ] Analysis of user performance on musical instruments
 - [ ] Progress tracking
-- [ ] Personalized recommendations 
+- [ ] Personalized recommendations of exercises
 
 ## Getting Started
 
@@ -16,13 +16,13 @@ To set up the project locally, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/your-project.git
+   git clone https://github.com/shrewman/melody-mentor.git
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd your-project
+   cd melody-mentor
    ```
 
 3. Install dependencies:
