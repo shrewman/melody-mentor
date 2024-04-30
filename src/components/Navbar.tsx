@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
-    <nav className="fixed left-0 top-0 w-full border-b-4 border-surface1 bg-surface0 p-5">
+    <nav className="fixed z-[1001] left-0 top-0 w-full border-b-4 border-surface1 bg-surface0 p-5">
       <ul className="flex justify-center">
         <li>
           <Link className="p-5 hover:bg-surface1" to="/">
