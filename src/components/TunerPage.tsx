@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import noteFrequencyMap from "../utils/noteFrequencyMap.ts";
+import Navbar from "./Navbar.tsx";
 
 const TunerPage = () => {
   const [isTuning, setIsTuning] = useState(false);
@@ -76,13 +77,14 @@ const TunerPage = () => {
 
   // TODO: better interface, <progress> maybe? 
   return (
-    <div>
+    <>
+      <Navbar />
       <button onClick={() => setIsTuning(!isTuning)}>
         {isTuning ? "Stop Tuning" : "Start Tuning"}
       </button>
       <p>Detected Frequency: {detectedFrequency} Hz</p>
       <p>Nearest Note: {nearestNote}</p>
-    </div>
+    </>
   );
 };
 

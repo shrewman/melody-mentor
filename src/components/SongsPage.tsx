@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Song as SongType } from "../types";
 import Song from "./Song";
+import Navbar from "./Navbar";
 
 export default function SongsPage() {
   const [songs, setSongs] = useState<SongType[] | null>(null);
@@ -26,6 +27,7 @@ export default function SongsPage() {
 
   return (
     <>
+      <Navbar />
       {isLoading ? (
         <div>loading...</div>
       ) : (

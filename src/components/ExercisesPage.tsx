@@ -1,3 +1,10 @@
+import Navbar from "./Navbar";
+
 export default function ExercisesPage() {
-  return <>Exercises</>;
+  return (
+    <>
+      <Navbar />
+      Exercises
+    </>
+  );
 }

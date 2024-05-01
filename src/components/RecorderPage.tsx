@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AudioRecorder } from "react-audio-voice-recorder";
+import Navbar from "./Navbar";
 
 export default function RecorderPage() {
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
@@ -11,6 +12,7 @@ export default function RecorderPage() {
 
   return (
     <>
+      <Navbar />
       <AudioRecorder
         onRecordingComplete={addAudioElement}
         audioTrackConstraints={{
