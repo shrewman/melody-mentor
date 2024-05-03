@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import AlphatabContainer from "./AlphatabContainer";
+import AlphatabContainer from "./alphatab-container/AlphatabContainer";
 
 const ScorePage = () => {
   const { fileName } = useParams<{ fileName: string }>();

@@ -14,3 +14,8 @@ button {
   background: #45475a;
 
 }
+
+.at-cursor-beat {
+    background: #1e66f5;
+    width: 3px;
+}
