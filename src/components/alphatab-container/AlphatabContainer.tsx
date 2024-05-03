@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Controls from "./Controls";
 import Tracks from "./Tracks";
 
@@ -8,6 +8,7 @@ const AlphatabContainer: React.FC<Props> = ({ fileUrl }) => {
   const alphatabContainer = useRef(null);
   const scrollElement = useRef(null);
   const api = useRef<any>(null);
+  const [score, setScore] = useState(null);
 
   useEffect(() => {
     const container = alphatabContainer.current;
@@ -36,6 +37,10 @@ const AlphatabContainer: React.FC<Props> = ({ fileUrl }) => {
 
     api.current = new alphaTab.AlphaTabApi(container, settings);
 
+    api.current.scoreLoaded.on((score) => {
+      setScore(score);
+    });
+
     return () => {
       api.current.destroy();
     };
@@ -50,7 +55,7 @@ const AlphatabContainer: React.FC<Props> = ({ fileUrl }) => {
             <div ref={alphatabContainer}></div>
           </div>
         </div>
-        <Controls api={api}></Controls>
+        <Controls api={api} title={score?.title}></Controls>
       </div>
     </>
   );
