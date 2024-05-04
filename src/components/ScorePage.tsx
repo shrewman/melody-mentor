@@ -1,33 +1,25 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import AlphatabContainer from "./alphatab-container/AlphatabContainer";
+import { useQuery } from "react-query";
 
 const ScorePage = () => {
   const { fileName } = useParams<{ fileName: string }>();
-  const [fileUrl, setFileUrl] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/songs/${fileName}`)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to fetch file");
-        }
-        return res.blob();
-      })
-      .then((blob) => {
-        const blobUrl = URL.createObjectURL(blob);
-        setFileUrl(blobUrl);
-      })
-      .catch((err) => console.error("error: ", err));
-  }, [fileName]);
+  const fetchFile = async () => {
+    const res = await fetch(`http://localhost:3000/api/v1/songs/${fileName}`);
+    if (!res.ok) {
+      throw new Error("Failed to fetch file");
+    }
+    const blob = await res.blob();
+    return URL.createObjectURL(blob);
+  };
+
+  const { data, isLoading } = useQuery("file", fetchFile);
 
   return (
     <>
-      {fileUrl ? (
-        <AlphatabContainer fileUrl={fileUrl}></AlphatabContainer>
-      ) : (
-        <div>Loading...</div>
-      )}
+      {data && <AlphatabContainer fileUrl={data}></AlphatabContainer>}
+      {isLoading && <div>Loading...</div>}
     </>
   );
 };
