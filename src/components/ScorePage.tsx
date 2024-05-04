@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import AlphatabContainer from "./alphatab-container/AlphatabContainer";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 const ScorePage = () => {
   const { fileName } = useParams<{ fileName: string }>();
@@ -14,7 +14,10 @@ const ScorePage = () => {
     return URL.createObjectURL(blob);
   };
 
-  const { data, isLoading } = useQuery("file", fetchFile);
+  const { data, isLoading } = useQuery({
+    queryKey: ["file"],
+    queryFn: fetchFile,
+  });
 
   return (
     <>

@@ -12,11 +12,11 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-audio-voice-recorder": "^2.2.0",
-    "react-dom": "^18.2.0",
-    "react-query": "^3.39.3"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@catppuccin/tailwindcss": "^0.1.6",
+    "@tanstack/eslint-plugin-query": "^5.32.1",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.2.0",

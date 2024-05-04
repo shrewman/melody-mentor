@@ -1,7 +1,7 @@
 import { Song as SongType } from "../types";
 import Song from "./Song";
 import Navbar from "./Navbar";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export default function SongsPage() {
   const fetchSongs = async () => {
@@ -12,7 +12,10 @@ export default function SongsPage() {
     return res.json();
   };
 
-  const { data, isLoading } = useQuery("songs", fetchSongs);
+  const { data, isLoading } = useQuery({
+    queryKey: ["songs"],
+    queryFn: fetchSongs,
+  });
 
   return (
     <>
