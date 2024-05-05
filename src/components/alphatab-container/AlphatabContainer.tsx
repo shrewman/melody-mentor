@@ -8,7 +8,7 @@ const AlphatabContainer: React.FC<Props> = ({ fileUrl }) => {
   const alphatabContainer = useRef(null);
   const scrollElement = useRef(null);
   const api = useRef<any>(null);
-  const [score, setScore] = useState(null);
+  const [score, setScore] = useState<any>(null);
 
   useEffect(() => {
     const container = alphatabContainer.current;
@@ -50,7 +50,7 @@ const AlphatabContainer: React.FC<Props> = ({ fileUrl }) => {
     <>
       <div className="flex h-screen flex-col overflow-hidden">
         <div className="relative flex flex-1 overflow-hidden">
-          <Tracks api={api}></Tracks>
+          {score?.tracks.length > 1 && <Tracks api={api} tracks={score.tracks}></Tracks>}
           <div ref={scrollElement} className="ml-12 w-screen overflow-x-hidden">
             <div ref={alphatabContainer}></div>
           </div>

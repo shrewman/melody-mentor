@@ -4,7 +4,7 @@ This project aims to develop a web application for users to play musical notatio
 
 ## Key Features
 
-- [ ] Playback of musical notation with sound
+- [x] Playback of musical notation with sound
 - [ ] Analysis of user performance on musical instruments
 - [ ] Progress tracking
 - [ ] Personalized recommendations of exercises
