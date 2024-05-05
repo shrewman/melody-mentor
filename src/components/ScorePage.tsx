@@ -17,6 +17,7 @@ const ScorePage = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["file"],
     queryFn: fetchFile,
+    refetchOnWindowFocus: false,
   });
 
   return (

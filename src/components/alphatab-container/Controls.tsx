@@ -1,15 +1,31 @@
-import { MutableRefObject, useRef } from "react";
+import { MutableRefObject, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faClockRotateLeft,
+  faDrum,
+  faFolder,
+  faHouse,
+  faPause,
+  faPersonRunning,
+  faPlay,
+  faRepeat,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
   api: MutableRefObject<any>;
-  title: string;
 };
 
-const Controls: React.FC<Props> = ({ api, title }) => {
+const Controls: React.FC<Props> = ({ api }) => {
   const controlsBar = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMetronomeEnabled, setIsMetronomeEnabled] = useState(false);
+  const [isCountInEnabled, setIsCountInEnabled] = useState(false);
+  const [isLoopEnabled, setIsLoopEnabled] = useState(false);
 
   const handlePlayPauseClick = () => {
+    setIsPlaying(!isPlaying);
     api.current.playPause();
   };
 
@@ -18,13 +34,19 @@ const Controls: React.FC<Props> = ({ api, title }) => {
   };
 
   const handleMetronomeClick = () => {
+    setIsMetronomeEnabled(!isMetronomeEnabled);
     const currentVolume = api.current.metronomeVolume;
     api.current.metronomeVolume = Math.abs(currentVolume - 1);
   };
 
   const handleCountInClick = () => {
+    setIsCountInEnabled(!isCountInEnabled);
     const currentVolume = api.current.countInVolume;
     api.current.countInVolume = Math.abs(currentVolume - 1);
+  };
+
+  const handleLoopClick = () => {
+    setIsLoopEnabled(!isLoopEnabled);
   };
 
   const handleZoomChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -50,34 +72,77 @@ const Controls: React.FC<Props> = ({ api, title }) => {
         ref={controlsBar}
         className="flex h-10 w-full items-center justify-between bg-surface0 p-3 text-text"
       >
-        <div>
-          <Link to="/">Home</Link>
-          <button onClick={handlePlayPauseClick}>Play</button>
-          <select defaultValue={1} onChange={handleSpeedChange}>
-            <option value="0.5">0.5x</option>
-            <option value="0.75">0.75x</option>
-            <option value="1">
-              1x
-            </option>
-            <option value="1.5">1.5x</option>
-            <option value="2">2x</option>
-          </select>
-          <span>{title}</span>
+        <div className="flex items-center justify-between">
+          <a onClick={handlePlayPauseClick} className="my-auto h-5">
+            {isPlaying ? (
+              <FontAwesomeIcon icon={faPause} className="h-5 w-5" />
+            ) : (
+              <FontAwesomeIcon icon={faPlay} className="h-5 w-5" />
+            )}
+          </a>
+          <div className="my-auto ml-5 flex h-5 items-center">
+            <FontAwesomeIcon icon={faPersonRunning} className="my-auto h-5" />
+            <select
+              className="ml-1 w-16 bg-surface0 text-center"
+              defaultValue={1}
+              onChange={handleSpeedChange}
+            >
+              <option value="0.5">0.5x</option>
+              <option value="0.75">0.75x</option>
+              <option value="1">1x</option>
+              <option value="1.5">1.5x</option>
+              <option value="2">2x</option>
+            </select>
+          </div>
+          <a className="ml-5" onClick={handleCountInClick}>
+            <FontAwesomeIcon
+              icon={faClockRotateLeft}
+              className={`${isCountInEnabled ? "text-green" : "text-text"}`}
+            />
+          </a>
+          <a className="ml-5" onClick={handleMetronomeClick}>
+            <FontAwesomeIcon
+              icon={faDrum}
+              className={`${isMetronomeEnabled ? "text-green" : "text-text"}`}
+            />
+          </a>
+          <a className="ml-5" onClick={handleLoopClick}>
+            <FontAwesomeIcon
+              icon={faRepeat}
+              className={`${isLoopEnabled ? "text-green" : "text-text"}`}
+            />
+          </a>
         </div>
-        <div>
-          <button onClick={handleCountInClick}>count</button>
-          <button onClick={handleMetronomeClick}>met</button>
-          <button>loop</button>
-          <select defaultValue={1} onChange={handleZoomChange}>
-            <option value="0.75">75</option>
-            <option value="1">100</option>
-            <option value="1.5">150</option>
-          </select>
-          <select onChange={handleLayoutChange}>
-            <option value="page">Page</option>
-            <option value="horizontal">Horizontal</option>
-          </select>
-          <button>import</button>
+
+        <div className="flex justify-between">
+          <Link to="/">
+            <FontAwesomeIcon icon={faHouse} className="h-4" />
+          </Link>
+          <div className="ml-5">
+            <FontAwesomeIcon icon={faSearch} />
+            <select
+              className="ml-1 bg-surface0 text-center"
+              defaultValue={1}
+              onChange={handleZoomChange}
+            >
+              <option value="0.75">75%</option>
+              <option value="1">100%</option>
+              <option value="1.5">150%</option>
+            </select>
+          </div>
+          <div>
+            <select
+              className="ml-1 bg-surface0 text-center"
+              onChange={handleLayoutChange}
+            >
+              <option value="page">Page</option>
+              <option value="horizontal">Horizontal</option>
+            </select>
+          </div>
+
+          <a className="ml-5" onClick={handleMetronomeClick}>
+            <FontAwesomeIcon icon={faFolder} />
+          </a>
         </div>
       </div>
     </>

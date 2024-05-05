@@ -50,12 +50,12 @@ const AlphatabContainer: React.FC<Props> = ({ fileUrl }) => {
     <>
       <div className="flex h-screen flex-col overflow-hidden">
         <div className="relative flex flex-1 overflow-hidden">
-          <Tracks></Tracks>
+          <Tracks api={api}></Tracks>
           <div ref={scrollElement} className="ml-12 w-screen overflow-x-hidden">
             <div ref={alphatabContainer}></div>
           </div>
         </div>
-        <Controls api={api} title={score?.title}></Controls>
+        <Controls api={api}></Controls>
       </div>
     </>
   );
