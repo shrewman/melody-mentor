@@ -16,6 +16,12 @@ button {
 }
 
 .at-cursor-beat {
-    background: #1e66f5;
+    background: #df8e1d;
     width: 3px;
 }
+
+.at-selection div {
+  background: #7287fd44;
+}
+
+

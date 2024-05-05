@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { MutableRefObject, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -46,7 +46,11 @@ const Controls: React.FC<Props> = ({ api }) => {
   };
 
   const handleLoopClick = () => {
-    setIsLoopEnabled(!isLoopEnabled);
+    setIsLoopEnabled((prevIsEnabled) => {
+      const toggled = !prevIsEnabled
+      api.current.isLooping = toggled;
+      return toggled;
+    });
   };
 
   const handleZoomChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
