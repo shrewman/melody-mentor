@@ -55,7 +55,9 @@ const AlphatabContainer: React.FC<Props> = (props) => {
     <>
       <div className="flex h-screen flex-col overflow-hidden">
         <div className="relative flex flex-1 overflow-hidden">
-          {score?.tracks.length > 1 && <Tracks api={api} tracks={score.tracks}></Tracks>}
+          {score?.tracks.length > 1 && (
+            <Tracks api={api} tracks={score.tracks}></Tracks>
+          )}
           <div ref={scrollElement} className="ml-12 w-screen overflow-x-hidden">
             <div ref={alphatabContainer}></div>
           </div>

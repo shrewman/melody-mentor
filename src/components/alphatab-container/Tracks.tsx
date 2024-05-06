@@ -72,8 +72,8 @@ const Tracks: React.FC<Props> = ({ api, tracks }) => {
               className="flex items-center overflow-hidden py-1 transition hover:bg-surface2"
             >
               <FontAwesomeIcon className="h-9 p-3" icon={faMusic} />
-              <div className="w-2/5">
-                <div className="overflow-hidden whitespace-nowrap">
+              <div className="w-32">
+                <div className="text-sm overflow-hidden truncate mb-1">
                   {track.name}
                 </div>
                 <input
@@ -84,7 +84,7 @@ const Tracks: React.FC<Props> = ({ api, tracks }) => {
                   onChange={(e) => handleVolumeChange(track, e)}
                   onClick={(e) => e.stopPropagation()}
                   type="range"
-                  className="block accent-blue"
+                  className="block accent-blue mt-1"
                 />
               </div>
               <div className="ml-3 flex">
