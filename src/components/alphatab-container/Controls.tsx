@@ -15,10 +15,12 @@ import {
 
 type Props = {
   api: MutableRefObject<any>;
+  renderFile: (file: File) => void;
 };
 
-const Controls: React.FC<Props> = ({ api }) => {
+const Controls: React.FC<Props> = ({ api, renderFile }) => {
   const controlsBar = useRef(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMetronomeEnabled, setIsMetronomeEnabled] = useState(false);
   const [isCountInEnabled, setIsCountInEnabled] = useState(false);
@@ -68,6 +70,19 @@ const Controls: React.FC<Props> = ({ api }) => {
     }
     api.current.updateSettings();
     api.current.render();
+  };
+
+  const handleInputFileClick = () => {
+    if (!fileInputRef.current) return;
+    fileInputRef.current.click();
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) {
+      return;
+    }
+    const selectedFile = e.target.files[0];
+    renderFile(selectedFile);
   };
 
   return (
@@ -144,8 +159,14 @@ const Controls: React.FC<Props> = ({ api }) => {
             </select>
           </div>
 
-          <a className="ml-5" onClick={handleMetronomeClick}>
+          <a className="ml-5" onClick={handleInputFileClick}>
             <FontAwesomeIcon icon={faFolder} />
+            <input 
+              type="file"
+              className="hidden"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+            />
           </a>
         </div>
       </div>

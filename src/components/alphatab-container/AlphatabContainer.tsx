@@ -4,11 +4,12 @@ import Tracks from "./Tracks";
 
 type Props = { fileUrl: string };
 
-const AlphatabContainer: React.FC<Props> = ({ fileUrl }) => {
+const AlphatabContainer: React.FC<Props> = (props) => {
   const alphatabContainer = useRef(null);
   const scrollElement = useRef(null);
   const api = useRef<any>(null);
   const [score, setScore] = useState<any>(null);
+  const [fileUrl, setFileUrl] = useState<string>(props.fileUrl);
 
   useEffect(() => {
     const container = alphatabContainer.current;
@@ -46,6 +47,10 @@ const AlphatabContainer: React.FC<Props> = ({ fileUrl }) => {
     };
   }, [fileUrl]);
 
+  const renderFile = (file: File) => {
+    setFileUrl(URL.createObjectURL(file));
+  };
+
   return (
     <>
       <div className="flex h-screen flex-col overflow-hidden">
@@ -55,7 +60,7 @@ const AlphatabContainer: React.FC<Props> = ({ fileUrl }) => {
             <div ref={alphatabContainer}></div>
           </div>
         </div>
-        <Controls api={api}></Controls>
+        <Controls api={api} renderFile={renderFile}></Controls>
       </div>
     </>
   );
