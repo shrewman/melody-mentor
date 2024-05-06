@@ -80,7 +80,7 @@ const Tracks: React.FC<Props> = ({ api, tracks }) => {
                   min={0}
                   max={2}
                   step={0.1}
-                  value={volumes[index] || 1}
+                  value={volumes[index]}
                   onChange={(e) => handleVolumeChange(track, e)}
                   onClick={(e) => e.stopPropagation()}
                   type="range"
