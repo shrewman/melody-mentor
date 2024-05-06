@@ -1,4 +1,4 @@
-import { MutableRefObject, useRef, useState } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -27,9 +27,13 @@ const Controls: React.FC<Props> = ({ api, renderFile }) => {
   const [isLoopEnabled, setIsLoopEnabled] = useState(false);
 
   const handlePlayPauseClick = () => {
-    setIsPlaying(!isPlaying);
     api.current.playPause();
+    setIsPlaying(alphaTab.synth.PlayerState.Playing);
   };
+
+  api.current?.playerStateChanged.on((e) => {
+    setIsPlaying(e.state);
+  });
 
   const handleSpeedChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     api.current.playbackSpeed = e.target.value;
@@ -49,7 +53,7 @@ const Controls: React.FC<Props> = ({ api, renderFile }) => {
 
   const handleLoopClick = () => {
     setIsLoopEnabled((prevIsEnabled) => {
-      const toggled = !prevIsEnabled
+      const toggled = !prevIsEnabled;
       api.current.isLooping = toggled;
       return toggled;
     });
@@ -75,7 +79,7 @@ const Controls: React.FC<Props> = ({ api, renderFile }) => {
   const handleInputFileClick = () => {
     if (!fileInputRef.current) return;
     fileInputRef.current.click();
-  }
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {
@@ -161,7 +165,7 @@ const Controls: React.FC<Props> = ({ api, renderFile }) => {
 
           <a className="ml-5" onClick={handleInputFileClick}>
             <FontAwesomeIcon icon={faFolder} />
-            <input 
+            <input
               type="file"
               className="hidden"
               ref={fileInputRef}
