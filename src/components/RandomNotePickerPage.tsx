@@ -1,10 +1,7 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Navbar from "./Navbar";
 
 export default function RandomNotePickerPage() {
-  const [noteCount, setNoteCount] = useState<number | "">(3);
-  const [randomNotes, setRandomNotes] = useState<string[]>([]);
-
   const getRandomNotes = (length: number | "") => {
     if (length === "") return [];
     const notes = [
@@ -38,12 +35,15 @@ export default function RandomNotePickerPage() {
     return uniqueNotes;
   };
 
+  const [noteCount, setNoteCount] = useState<number | "">(3);
+  const randomNotes = useMemo(() => getRandomNotes(noteCount), [noteCount])
+
   return (
     <>
       <Navbar />
       <div className="m-5 grid grid-cols-5 gap-5 text-center">
         <div className="col-span-3 rounded-xl bg-surface0 p-5">
-          <p className="text-4xl">{randomNotes.map((note) => note + " ")}</p>
+          <p className="text-4xl">{randomNotes.join(" ")}</p>
         </div>
         <div className="col-span-2">
           <div>
@@ -56,12 +56,11 @@ export default function RandomNotePickerPage() {
                 const val = e.target.value === "" ? "" : Number(e.target.value);
                 if (val !== "" && (val > 100 || val < 1)) return;
                 setNoteCount(val);
-                setRandomNotes(getRandomNotes(val));
               }}
             />
           </div>
           <button
-            onClick={() => setRandomNotes(getRandomNotes(noteCount))}
+            onClick={() => setNoteCount(noteCount)}
             className="mx-auto block rounded-sm border-none bg-blue w-1/2"
           >
             Randomize
