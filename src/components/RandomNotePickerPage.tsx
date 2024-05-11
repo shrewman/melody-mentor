@@ -2,9 +2,6 @@ import { useState } from "react";
 import Navbar from "./Navbar";
 
 export default function RandomNotePickerPage() {
-  const [noteCount, setNoteCount] = useState<number | "">(3);
-  const [randomNotes, setRandomNotes] = useState<string[]>([]);
-
   const getRandomNotes = (length: number | "") => {
     if (length === "") return [];
     const notes = [
@@ -38,6 +35,9 @@ export default function RandomNotePickerPage() {
     return uniqueNotes;
   };
 
+  const [noteCount, setNoteCount] = useState<number | "">(3);
+  const [randomNotes, setRandomNotes] = useState<string[]>(getRandomNotes(3));
+
   return (
     <>
       <Navbar />
@@ -62,7 +62,7 @@ export default function RandomNotePickerPage() {
           </div>
           <button
             onClick={() => setRandomNotes(getRandomNotes(noteCount))}
-            className="mx-auto block rounded-sm border-none bg-blue w-1/2"
+            className="mx-auto block w-1/2 rounded-sm border-none bg-blue"
           >
             Randomize
           </button>
