@@ -43,7 +43,7 @@ export default function RandomNotePickerPage() {
       <Navbar />
       <div className="m-5 grid grid-cols-5 gap-5 text-center">
         <div className="col-span-3 rounded-xl bg-surface0 p-5">
-          <p className="text-4xl">{randomNotes.map((note) => note + " ")}</p>
+          <p className="text-4xl">{randomNotes.join(" ")}</p>
         </div>
         <div className="col-span-2">
           <div>
