@@ -19,7 +19,8 @@
     "@tanstack/react-query-devtools": "^5.34.1",
     "react": "^18.2.0",
     "react-audio-voice-recorder": "^2.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tone": "^15.0.4"
   },
   "devDependencies": {
     "@catppuccin/tailwindcss": "^0.1.6",

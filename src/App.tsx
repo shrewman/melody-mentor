@@ -9,6 +9,7 @@ import HomePage from "./components/HomePage";
 import ScorePage from "./components/ScorePage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import RandomNotePickerPage from "./components/RandomNotePickerPage";
+import RhythmPage from "./components/RhythmPage";
 
 function App() {
   const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ function App() {
             <Route path="/tuner" element={<TunerPage />} />
             <Route path="/exercises" element={<ExercisesPage />} />
             <Route path="/exercises/note-picker" element={<RandomNotePickerPage />} />
+            <Route path="/exercises/rhythm" element={<RhythmPage />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </BrowserRouter>
