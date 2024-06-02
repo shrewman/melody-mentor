@@ -1,33 +1,52 @@
 import { useState } from "react";
 import Navbar from "./Navbar";
 
+type NotesState = {
+  [key: string]: boolean;
+};
+
 export default function RandomNotePickerPage() {
+  const [notes, setNotes] = useState<NotesState>({
+    C: true,
+    D: true,
+    E: true,
+    F: true,
+    G: true,
+    A: true,
+    B: true,
+    "C#": false,
+    Db: false,
+    "D#": false,
+    Eb: false,
+    "F#": false,
+    Gb: false,
+    "G#": false,
+    Ab: false,
+    "A#": false,
+    Bb: false,
+  });
+
+  const handleCheckboxChange = (note: string) => {
+    setNotes({
+      ...notes,
+      [note]: !notes[note],
+    });
+  };
+
   const getRandomNotes = (length: number | "") => {
     if (length === "") return [];
-    const notes = [
-      "A",
-      "A#",
-      "B",
-      "C",
-      "C#",
-      "D",
-      "D#",
-      "E",
-      "F",
-      "F#",
-      "G",
-      "G#",
-    ];
 
-    const uniqueNotes = [];
+    const fromNotes = Object.keys(notes).filter((note) => notes[note]);
+
+    const uniqueNotes: string[] = [];
     let chosenIndeces: number[] = [];
 
     while (uniqueNotes.length < length) {
-      const r = Math.floor(Math.random() * notes.length);
+      const r = Math.floor(Math.random() * fromNotes.length);
       if (!chosenIndeces.includes(r)) {
-        uniqueNotes.push(notes[r]);
+        uniqueNotes.push(fromNotes[r]);
         chosenIndeces.push(r);
-        if (chosenIndeces.length === notes.length) {
+        if (chosenIndeces.length === fromNotes.length) {
           chosenIndeces = [];
         }
       }
@@ -35,8 +54,8 @@ export default function RandomNotePickerPage() {
     return uniqueNotes;
   };
 
-  const [noteCount, setNoteCount] = useState<number | "">(3);
-  const [randomNotes, setRandomNotes] = useState<string[]>(getRandomNotes(3));
+  const [noteCount, setNoteCount] = useState<number | "">(5);
+  const [randomNotes, setRandomNotes] = useState<string[]>(getRandomNotes(5));
 
   return (
     <>
@@ -66,6 +85,69 @@ export default function RandomNotePickerPage() {
           >
             Randomize
           </button>
+        </div>
+      </div>
+      <div className="m-5 rounded-xl bg-surface0 py-5">
+        <h1 className="flex justify-center">Options</h1>
+
+        <div className="m-5 rounded-xl bg-surface0 py-5">
+          <div className="mt-5 flex justify-center">
+            {["C", "D", "E", "F", "G", "A", "B"].map((note) => (
+              <div className="flex w-20" key={note}>
+                <div className="w-5">{note}</div>
+                <input
+                  type="checkbox"
+                  className="ml-1"
+                  checked={notes[note]}
+                  onChange={() => handleCheckboxChange(note)}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex justify-center">
+          <div className="mr-16 flex justify-center gap-5">
+            {[
+              ["C#", "Db"],
+              ["D#", "Eb"],
+            ].map((group) => (
+              <div key={group[0]}>
+                {group.map((note) => (
+                  <div className="flex w-20" key={note}>
+                    <div className="w-5">{note}</div>
+                    <input
+                      type="checkbox"
+                      className="ml-1"
+                      checked={notes[note]}
+                      onChange={() => handleCheckboxChange(note)}
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="flex justify-center gap-5">
+            {[
+              ["F#", "Gb"],
+              ["G#", "Ab"],
+              ["A#", "Bb"],
+            ].map((group) => (
+              <div key={group[0]}>
+                {group.map((note) => (
+                  <div className="flex w-20" key={note}>
+                    <div className="w-5">{note}</div>
+                    <input
+                      type="checkbox"
+                      className="ml-1"
+                      checked={notes[note]}
+                      onChange={() => handleCheckboxChange(note)}
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>
