@@ -166,7 +166,7 @@ export default function RandomNotePickerPage() {
       </div>
 =======
         <div className="flex justify-center">
-          <button onClick={() => setIsFretboardVisible(!isFretboardVisible)}>
+          <button className="w-36" onClick={() => setIsFretboardVisible(!isFretboardVisible)}>
             {isFretboardVisible ? "Hide fretboard" : "Show fretboard"}
           </button>
         </div>
