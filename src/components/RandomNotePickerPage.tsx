@@ -6,10 +6,6 @@ type NotesState = {
   [key: string]: boolean;
 };
 
-type NotesState = {
-  [key: string]: boolean;
-};
-
 export default function RandomNotePickerPage() {
   const [notes, setNotes] = useState<NotesState>({
     C: true,
@@ -61,10 +57,7 @@ export default function RandomNotePickerPage() {
 
   const [noteCount, setNoteCount] = useState<number | "">(5);
   const [randomNotes, setRandomNotes] = useState<string[]>(getRandomNotes(5));
-<<<<<<< HEAD
-=======
   const [isFretboardVisible, setIsFretboardVisible] = useState(false);
->>>>>>> e3df9a5 (feat: implement options for note picker)
 
   return (
     <>
@@ -98,12 +91,7 @@ export default function RandomNotePickerPage() {
       </div>
       <div className="m-5 rounded-xl bg-surface0 py-5">
         <h1 className="flex justify-center">Options</h1>
-<<<<<<< HEAD
-
         <div className="m-5 rounded-xl bg-surface0 py-5">
-=======
-        <div className="m-5 mt-0 rounded-xl bg-surface0 py-5">
->>>>>>> e3df9a5 (feat: implement options for note picker)
           <div className="mt-5 flex justify-center">
             {["C", "D", "E", "F", "G", "A", "B"].map((note) => (
               <div className="flex w-20" key={note}>
@@ -162,17 +150,16 @@ export default function RandomNotePickerPage() {
             ))}
           </div>
         </div>
-<<<<<<< HEAD
-      </div>
-=======
         <div className="flex justify-center">
-          <button className="w-36" onClick={() => setIsFretboardVisible(!isFretboardVisible)}>
+          <button
+            className="w-36"
+            onClick={() => setIsFretboardVisible(!isFretboardVisible)}
+          >
             {isFretboardVisible ? "Hide fretboard" : "Show fretboard"}
           </button>
         </div>
       </div>
-      {isFretboardVisible && <Fretboard /> }
->>>>>>> e3df9a5 (feat: implement options for note picker)
+      {isFretboardVisible && <Fretboard />}
     </>
   );
 }
