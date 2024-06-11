@@ -11,7 +11,7 @@ export default function ExercisesPage() {
             <h1 className="bold mb-3 text-center text-2xl text-blue">
               Random Note Picker
             </h1>
-            <p className="text-text">
+            <p className="text-text text-justify">
               Tool designed to help guitarists practice identifying and
               memorizing notes on the fretboard. It generates random notes
               across the fretboard, allowing to test knowledge and improve
@@ -21,12 +21,30 @@ export default function ExercisesPage() {
         </Link>
       </div>
       <div className="mx-auto max-w-[800px]">
+        <Link to="/exercises/ear-training">
+          <div className="m-5 bg-surface0 p-5 transition hover:bg-surface1">
+            <h1 className="bold mb-3 text-center text-2xl text-blue">
+              Ear Training
+            </h1>
+            <p className="text-text text-justify">
+              This exercise is designed to help improve ability to identify
+              musical notes by ear. First the random note is displayed on the
+              screen and the corresponding sound is played. Then, another note
+              is played, user tries to guess the second note based on what they
+              heard.
+            </p>
+          </div>
+        </Link>
+      </div>
+
+      {/* !!! HIDDEN !!! */}
+      <div className="mx-auto max-w-[800px] hidden">
         <Link to="/exercises/rhythm">
           <div className="m-5 bg-surface0 p-5 transition hover:bg-surface1">
             <h1 className="bold mb-3 text-center text-2xl text-blue">
               Rhytm Exercise
             </h1>
-            <p className="text-text">
+            <p className="text-text text-justify">
               Practice your timing with our adjustable online metronome. Set the
               tempo and play along to improve your rhythm accuracy. Follow along
               with visual rhythm patterns and click or play in time to match the
