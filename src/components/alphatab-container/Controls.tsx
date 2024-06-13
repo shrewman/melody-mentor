@@ -25,6 +25,7 @@ const Controls: React.FC<Props> = ({ api, renderFile }) => {
   const [isMetronomeEnabled, setIsMetronomeEnabled] = useState(false);
   const [isCountInEnabled, setIsCountInEnabled] = useState(false);
   const [isLoopEnabled, setIsLoopEnabled] = useState(false);
+  const [speed, setSpeed] = useState(1);
 
   const handlePlayPauseClick = () => {
     api.current.playPause();
@@ -35,8 +36,10 @@ const Controls: React.FC<Props> = ({ api, renderFile }) => {
     setIsPlaying(e.state);
   });
 
-  const handleSpeedChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    api.current.playbackSpeed = e.target.value;
+  const handleSpeedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(e.target.value);
+    setSpeed(value);
+    api.current.playbackSpeed = value;
   };
 
   const handleMetronomeClick = () => {
@@ -103,20 +106,6 @@ const Controls: React.FC<Props> = ({ api, renderFile }) => {
               <FontAwesomeIcon icon={faPlay} className="h-5 w-5" />
             )}
           </a>
-          <div className="my-auto ml-5 flex h-5 items-center">
-            <FontAwesomeIcon icon={faPersonRunning} className="my-auto h-5" />
-            <select
-              className="ml-1 w-16 bg-surface0 text-center"
-              defaultValue={1}
-              onChange={handleSpeedChange}
-            >
-              <option value="0.5">0.5x</option>
-              <option value="0.75">0.75x</option>
-              <option value="1">1x</option>
-              <option value="1.5">1.5x</option>
-              <option value="2">2x</option>
-            </select>
-          </div>
           <a className="ml-5" onClick={handleCountInClick}>
             <FontAwesomeIcon
               icon={faClockRotateLeft}
@@ -135,6 +124,29 @@ const Controls: React.FC<Props> = ({ api, renderFile }) => {
               className={`${isLoopEnabled ? "text-green" : "text-text"}`}
             />
           </a>
+          <div className="my-auto ml-5 flex h-5 items-center">
+            <FontAwesomeIcon
+              onClick={() => {
+                setSpeed(1);
+                api.current.playbackSpeed = 1;
+              }}
+              icon={faPersonRunning}
+              className="my-auto h-5"
+            />
+            <input
+              className="ml-1 w-20 bg-surface0 text-center md:w-40 "
+              defaultValue={1}
+              type="range"
+              min={0.3}
+              step={0.05}
+              max={2}
+              value={speed}
+              onChange={handleSpeedChange}
+            ></input>
+            <span className="text-md mx-3 w-5 text-center font-bold">
+              {speed}x
+            </span>
+          </div>
         </div>
 
         <div className="flex justify-between">
@@ -144,7 +156,7 @@ const Controls: React.FC<Props> = ({ api, renderFile }) => {
           <div className="ml-5">
             <FontAwesomeIcon icon={faSearch} />
             <select
-              className="ml-1 bg-surface0 text-center"
+              className="ml-1 hidden bg-surface0 text-center md:block"
               defaultValue={1}
               onChange={handleZoomChange}
             >
@@ -155,7 +167,7 @@ const Controls: React.FC<Props> = ({ api, renderFile }) => {
           </div>
           <div>
             <select
-              className="ml-1 bg-surface0 text-center"
+              className="ml-1 hidden bg-surface0 text-center md:block"
               onChange={handleLayoutChange}
             >
               <option value="page">Page</option>
