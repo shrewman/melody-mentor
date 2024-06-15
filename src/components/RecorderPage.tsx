@@ -3,17 +3,17 @@ import { AudioRecorder } from "react-audio-voice-recorder";
 import Navbar from "./Navbar";
 
 export default function RecorderPage() {
-  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const [audioUrls, setAudioUrls] = useState<string[]>([]);
 
   const addAudioElement = (blob: Blob) => {
     const url = URL.createObjectURL(blob);
-    setAudioUrl(url);
+    setAudioUrls([...audioUrls, url]);
   };
 
   return (
     <>
       <Navbar />
-      <div className="m-5">
+      <div className="m-5 rounded-xl bg-surface0 p-5">
         <h1 className="mb-5 text-center">Recorder</h1>
         <h2 className="mb-5 text-center">
           Press the button to start recording
@@ -31,9 +31,14 @@ export default function RecorderPage() {
           />
         </div>
         <br />
-        <div className="flex justify-center">
-          {audioUrl && <audio src={audioUrl} controls className="w-1/2" />}
-        </div>
+      </div>
+      <div className="mx-auto w-1/2 justify-center rounded-xl bg-surface0 p-5">
+        <h2 className="text-center">Recordings</h2>
+        {audioUrls.map((url) => (
+          <div className="flex items-center">
+            <audio src={url} controls className="mt-5 w-full color-text" />
+          </div>
+        ))}
       </div>
     </>
   );
