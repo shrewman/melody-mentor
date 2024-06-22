@@ -22,7 +22,10 @@ const TunerPage = () => {
     const startListening = async () => {
       try {
         const micStream = await navigator.mediaDevices.getUserMedia({
-          audio: true,
+          audio: {
+            noiseSuppression: false,
+            echoCancellation: false,
+          },
         });
         setStream(micStream);
         const fftSize = 16384;
@@ -109,7 +112,7 @@ const TunerPage = () => {
   return (
     <>
       <Navbar />
-      <div className="bg-surface0 rounded-xl p-3 mt-5 w-1/2 mx-auto">
+      <div className="mx-auto mt-5 w-1/2 rounded-xl bg-surface0 p-3">
         <div className="mx-auto w-2/3 text-center">
           <button
             className="rounded bg-blue px-4 py-2 text-surface0"
@@ -122,11 +125,11 @@ const TunerPage = () => {
           </p>
           <div className="mt-3">
             <div className="relative pt-1">
-              <div className="mb-2 grid grid-cols-9 text-gray-600">
+              <div className="mb-2 grid grid-cols-9">
                 <span className="mt-5 text-xl text-text">
                   {previousNote.slice(0, -1)}
                 </span>
-                <span className="text-4xl text-white col-span-7">
+                <span className="col-span-7 text-4xl text-white">
                   {nearestNote.slice(0, -1)}
                 </span>
                 <span className="mt-5 text-xl text-text">
@@ -142,6 +145,38 @@ const TunerPage = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="m-5 rounded-xl bg-surface0 p-3 md:mx-auto md:w-1/2">
+        <h2 className="text-center text-2xl font-bold">
+          How to tune your instrument
+        </h2>
+        <p className="mt-3">
+          To tune your guitar, start by plucking the string you want to tune.
+        </p>
+        <p className="mt-3">
+          The standard tuning for a six-string <b>guitar</b> from lowest to
+          highest string is: <b>E, A, D, G, B, E</b>.
+        </p>
+        <p className="mt-3">
+          For a <b>bass guitar</b>, the standard tuning for a four-string bass
+          is: <b> E, A, D, G</b>.
+        </p>
+        <p className="mt-3">
+          Use the tuner to find the detected frequency and adjust the tuning peg
+          until the detected frequency matches the target frequency for the
+          desired note.
+        </p>
+        <p className="mt-3">Standard tuning frequencies for each string are:</p>
+        <ul className="mt-3 list-disc pl-5">
+          <li>
+            Guitar: E (82.41 Hz), A (110.00 Hz), D (146.83 Hz), G (196.00 Hz), B
+            (246.94 Hz), E (329.63 Hz)
+          </li>
+          <li>Bass: E (41.20 Hz), A (55.00 Hz), D (73.42 Hz), G (98.00 Hz)</li>
+        </ul>
+        <p className="mt-3">
+          Keep tuning each string until all of them are in the correct pitch.
+        </p>
       </div>
     </>
   );
