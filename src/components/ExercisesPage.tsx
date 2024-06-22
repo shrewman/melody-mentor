@@ -7,11 +7,11 @@ export default function ExercisesPage() {
       <Navbar />
       <div className="mx-auto max-w-[800px]">
         <Link to="/exercises/note-picker">
-          <div className="m-5 bg-surface0 p-5 transition hover:bg-surface1">
+          <div className="m-5 rounded-xl bg-surface0 p-5 transition hover:bg-surface1">
             <h1 className="bold mb-3 text-center text-2xl text-blue">
               Random Note Picker
             </h1>
-            <p className="text-text text-justify">
+            <p className="text-justify text-text">
               Tool designed to help guitarists practice identifying and
               memorizing notes on the fretboard. It generates random notes
               across the fretboard, allowing to test knowledge and improve
@@ -22,11 +22,11 @@ export default function ExercisesPage() {
       </div>
       <div className="mx-auto max-w-[800px]">
         <Link to="/exercises/ear-training">
-          <div className="m-5 bg-surface0 p-5 transition hover:bg-surface1">
+          <div className="m-5 rounded-xl bg-surface0 p-5 transition hover:bg-surface1">
             <h1 className="bold mb-3 text-center text-2xl text-blue">
               Ear Training
             </h1>
-            <p className="text-text text-justify">
+            <p className="text-justify text-text">
               This exercise is designed to help improve ability to identify
               musical notes by ear. First the random note is displayed on the
               screen and the corresponding sound is played. Then, another note
@@ -38,13 +38,13 @@ export default function ExercisesPage() {
       </div>
 
       {/* !!! HIDDEN !!! */}
-      <div className="mx-auto max-w-[800px] hidden">
+      <div className="mx-auto hidden max-w-[800px]">
         <Link to="/exercises/rhythm">
           <div className="m-5 bg-surface0 p-5 transition hover:bg-surface1">
             <h1 className="bold mb-3 text-center text-2xl text-blue">
               Rhytm Exercise
             </h1>
-            <p className="text-text text-justify">
+            <p className="text-justify text-text">
               Practice your timing with our adjustable online metronome. Set the
               tempo and play along to improve your rhythm accuracy. Follow along
               with visual rhythm patterns and click or play in time to match the

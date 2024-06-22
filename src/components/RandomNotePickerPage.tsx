@@ -83,7 +83,7 @@ export default function RandomNotePickerPage() {
           </div>
           <button
             onClick={() => setRandomNotes(getRandomNotes(noteCount))}
-            className="mx-auto block w-1/2 rounded-sm border-none bg-blue"
+            className="mx-auto block w-1/2 rounded-sm bg-blue text-surface0"
           >
             Randomize
           </button>
@@ -152,7 +152,7 @@ export default function RandomNotePickerPage() {
         </div>
         <div className="flex justify-center">
           <button
-            className="w-36"
+            className="w-36 mt-5"
             onClick={() => setIsFretboardVisible(!isFretboardVisible)}
           >
             {isFretboardVisible ? "Hide fretboard" : "Show fretboard"}
