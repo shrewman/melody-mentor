@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { MutableRefObject, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -63,7 +63,7 @@ const Controls: React.FC<Props> = ({ api, renderFile }) => {
   };
 
   const handleZoomChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    api.current.settings.display.scale = e.target.value;
+    api.current.settings.display.scale = Number(e.target.value) / 100;
     api.current.updateSettings();
     api.current.render();
   };
@@ -106,23 +106,23 @@ const Controls: React.FC<Props> = ({ api, renderFile }) => {
               <FontAwesomeIcon icon={faPlay} className="h-5 w-5" />
             )}
           </a>
-          <a className="ml-5" onClick={handleCountInClick}>
-            <FontAwesomeIcon
-              icon={faClockRotateLeft}
-              className={`${isCountInEnabled ? "text-green" : "text-text"}`}
-            />
+          <a
+            className={`ml-3 p-2 px-3 ${isCountInEnabled ? "bg-green text-surface0" : "text-text"}`}
+            onClick={handleCountInClick}
+          >
+            <FontAwesomeIcon icon={faClockRotateLeft} />
           </a>
-          <a className="ml-5" onClick={handleMetronomeClick}>
-            <FontAwesomeIcon
-              icon={faDrum}
-              className={`${isMetronomeEnabled ? "text-green" : "text-text"}`}
-            />
+          <a
+            className={`ml-1 p-2 px-3 ${isMetronomeEnabled ? "bg-green text-surface0" : "text-text"}`}
+            onClick={handleMetronomeClick}
+          >
+            <FontAwesomeIcon icon={faDrum} />
           </a>
-          <a className="ml-5" onClick={handleLoopClick}>
-            <FontAwesomeIcon
-              icon={faRepeat}
-              className={`${isLoopEnabled ? "text-green" : "text-text"}`}
-            />
+          <a
+            className={`ml-1 p-2 px-3 ${isLoopEnabled ? "bg-green text-surface0" : "text-text"}`}
+            onClick={handleLoopClick}
+          >
+            <FontAwesomeIcon icon={faRepeat} />
           </a>
           <div className="my-auto ml-5 flex h-5 items-center">
             <FontAwesomeIcon
@@ -130,11 +130,10 @@ const Controls: React.FC<Props> = ({ api, renderFile }) => {
                 setSpeed(1);
                 api.current.playbackSpeed = 1;
               }}
-              icon={faPersonRunning}
-              className="my-auto h-5"
+              icon={faPersonRunning} className="my-auto h-5"
             />
             <input
-              className="ml-1 w-20 bg-surface0 text-center md:w-40 "
+              className="ml-1 w-40 bg-surface0 text-center"
               defaultValue={1}
               type="range"
               min={0.3}
@@ -156,13 +155,13 @@ const Controls: React.FC<Props> = ({ api, renderFile }) => {
           <div className="ml-5">
             <FontAwesomeIcon icon={faSearch} />
             <select
-              className="ml-1 hidden bg-surface0 text-center md:block"
-              defaultValue={1}
+              className="ml-1 hidden bg-surface0 text-center md:inline"
+              defaultValue={100}
               onChange={handleZoomChange}
             >
-              <option value="0.75">75%</option>
-              <option value="1">100%</option>
-              <option value="1.5">150%</option>
+              <option value="75">75%</option>
+              <option value="100" selected>100%</option>
+              <option value="150">150%</option>
             </select>
           </div>
           <div>
