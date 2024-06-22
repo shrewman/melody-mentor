@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import * as Tone from "tone";
 import Navbar from "./Navbar";
 
@@ -19,19 +19,11 @@ const notes = [
 
 const getRandomNote = () => notes[Math.floor(Math.random() * notes.length)];
 
-const GuitarNoteGame: React.FC = () => {
+const EarTrainingPage: React.FC = () => {
   const [firstNote, setFirstNote] = useState<string>(getRandomNote);
   const [secondNote, setSecondNote] = useState<string>(getRandomNote);
-  const [userGuess, setUserGuess] = useState<string | null>(null);
   const [message, setMessage] = useState<string>("Guess the note");
-
   const [isDisabled, setIsDisabled] = useState(false);
-
-  useEffect(() => {
-    if (secondNote === firstNote) {
-      setSecondNote(getRandomNote());
-    }
-  }, [secondNote, firstNote]);
 
   const handleNewGame = () => {
     setIsDisabled(true);
@@ -42,7 +34,6 @@ const GuitarNoteGame: React.FC = () => {
       newGuessNote = getRandomNote();
     }
     setSecondNote(newGuessNote);
-    setUserGuess(null);
     setMessage("Guess the second note");
 
     const synth = new Tone.Synth().toDestination();
@@ -57,7 +48,6 @@ const GuitarNoteGame: React.FC = () => {
   };
 
   const handleGuess = (note: string) => {
-    setUserGuess(note);
     if (note === secondNote) {
       setMessage("Correct!");
     } else {
@@ -92,7 +82,7 @@ const GuitarNoteGame: React.FC = () => {
             {notes.map((note) => (
               <button
                 key={note}
-                className={`rounded px-4 py-2 text-xl font-bold text-surface1 ${isDisabled ? "bg-surface0" : "bg-blue"}`}
+                className={`rounded px-4 py-2 text-xl font-bold text-surface1 ${isDisabled ? "bg-surface2" : "bg-blue"}`}
                 disabled={isDisabled}
                 onClick={() => handleGuess(note)}
               >
@@ -102,14 +92,14 @@ const GuitarNoteGame: React.FC = () => {
           </div>
           <div className="grid grid-cols-2 p-2">
             <button
-              className={`mt-4 rounded px-4 py-2 font-bold text-surface1 ${isDisabled ? "bg-surface0" : "bg-lavender"}`}
+              className={`mt-4 rounded px-4 py-2 font-bold text-surface1 ${isDisabled ? "bg-surface2" : "bg-lavender"}`}
               onClick={handleNewGame}
               disabled={isDisabled}
             >
               New Game
             </button>
             <button
-              className={`mt-4 rounded px-4 py-2 font-bold text-surface1 ${isDisabled ? "bg-surface0" : "bg-green"}`}
+              className={`mt-4 rounded px-4 py-2 font-bold text-surface1 ${isDisabled ? "bg-surface2" : "bg-green"}`}
               onClick={handleReplayNotes}
               disabled={isDisabled}
             >
@@ -122,4 +112,4 @@ const GuitarNoteGame: React.FC = () => {
   );
 };
 
-export default GuitarNoteGame;
+export default EarTrainingPage;
