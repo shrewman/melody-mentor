@@ -4,12 +4,10 @@ import Navbar from "./Navbar";
 
 export default function RecorderPage() {
   const [audioUrls, setAudioUrls] = useState<string[]>([]);
-
   const addAudioElement = (blob: Blob) => {
     const url = URL.createObjectURL(blob);
     setAudioUrls([...audioUrls, url]);
   };
-
   return (
     <>
       <Navbar />
@@ -30,15 +28,18 @@ export default function RecorderPage() {
             showVisualizer={true}
           />
         </div>
-        <br />
       </div>
       <div className="mx-auto w-1/2 justify-center rounded-xl bg-surface0 p-5">
         <h2 className="text-center">Recordings</h2>
         {audioUrls.map((url) => (
           <div className="flex items-center">
-            <audio src={url} controls className="mt-5 w-full color-text" />
+            <audio src={url} controls className=" mt-5 w-full" />
           </div>
         ))}
+        {audioUrls.length === 0 && ( <div className="mt-5 text-center">
+            Record something to view here...
+          </div>
+        )}
       </div>
     </>
   );
