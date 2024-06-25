@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faClockRotateLeft,
   faDrum,
-  faFolder,
   faHouse,
   faPause,
   faPersonRunning,
@@ -15,10 +14,9 @@ import {
 
 type Props = {
   api: MutableRefObject<any>;
-  renderFile: (file: File) => void;
 };
 
-const Controls: React.FC<Props> = ({ api, renderFile }) => {
+const Controls: React.FC<Props> = ({ api }) => {
   const controlsBar = useRef(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -82,14 +80,6 @@ const Controls: React.FC<Props> = ({ api, renderFile }) => {
   const handleInputFileClick = () => {
     if (!fileInputRef.current) return;
     fileInputRef.current.click();
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) {
-      return;
-    }
-    const selectedFile = e.target.files[0];
-    renderFile(selectedFile);
   };
 
   return (
@@ -173,16 +163,6 @@ const Controls: React.FC<Props> = ({ api, renderFile }) => {
               <option value="horizontal">Horizontal</option>
             </select>
           </div>
-
-          <a className="ml-5" onClick={handleInputFileClick}>
-            <FontAwesomeIcon icon={faFolder} />
-            <input
-              type="file"
-              className="hidden"
-              ref={fileInputRef}
-              onChange={handleFileChange}
-            />
-          </a>
         </div>
       </div>
     </>

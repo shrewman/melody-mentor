@@ -9,13 +9,12 @@ const AlphatabContainer: React.FC<Props> = (props) => {
   const scrollElement = useRef(null);
   const api = useRef<any>(null);
   const [score, setScore] = useState<any>(null);
-  const [fileUrl, setFileUrl] = useState<string>(props.fileUrl);
 
   useEffect(() => {
     const container = alphatabContainer.current;
 
     const settings = {
-      file: fileUrl,
+      file: props.fileUrl,
       player: {
         enablePlayer: true,
         enableCursor: true,
@@ -45,11 +44,7 @@ const AlphatabContainer: React.FC<Props> = (props) => {
     return () => {
       api.current.destroy();
     };
-  }, [fileUrl]);
-
-  const renderFile = (file: File) => {
-    setFileUrl(URL.createObjectURL(file));
-  };
+  }, [props.fileUrl]);
 
   return (
     <>
@@ -62,7 +57,7 @@ const AlphatabContainer: React.FC<Props> = (props) => {
             <div ref={alphatabContainer}></div>
           </div>
         </div>
-        <Controls api={api} renderFile={renderFile}></Controls>
+        <Controls api={api}></Controls>
       </div>
     </>
   );
