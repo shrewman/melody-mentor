@@ -11,7 +11,7 @@ export default function RecorderPage() {
   return (
     <>
       <Navbar />
-      <div className="m-5 rounded-xl bg-surface0 p-5">
+      <div className="container m-5 mx-auto w-full max-w-[800px] rounded-xl bg-surface0 p-5">
         <h1 className="mb-5 text-center">Recorder</h1>
         <h2 className="mb-5 text-center">
           Press the button to start recording
@@ -29,14 +29,15 @@ export default function RecorderPage() {
           />
         </div>
       </div>
-      <div className="mx-auto w-1/2 justify-center rounded-xl bg-surface0 p-5">
+      <div className="container mx-auto m-5 w-full max-w-[800px] rounded-xl bg-surface0 p-5">
         <h2 className="text-center">Recordings</h2>
         {audioUrls.map((url) => (
           <div className="flex items-center">
-            <audio src={url} controls className=" mt-5 w-full" />
+            <audio src={url} controls className="mt-5 w-full" />
           </div>
         ))}
-        {audioUrls.length === 0 && ( <div className="mt-5 text-center">
+        {audioUrls.length === 0 && (
+          <div className="mt-5 text-center">
             Record something to view here...
           </div>
         )}
