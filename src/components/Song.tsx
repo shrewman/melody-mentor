@@ -17,7 +17,7 @@ const Song: React.FC<Props> = ({ song }) => {
 
   return (
     <Link to={"/songs/" + song.file_name}>
-      <div className="mb-4 flex justify-between border-4 border-surface1 bg-surface0 p-3">
+      <div className="mx-auto mb-4 flex max-w-[800px] justify-between rounded-xl bg-surface0 p-3">
         <div>
           <h1 className="mb-3 font-bold">{song.title}</h1>
           <h2 className="mb-3">{song.artist_name}</h2>
